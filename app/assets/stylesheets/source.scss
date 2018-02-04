@@ -1,3 +1,28 @@
 // Place all the styles related to the source controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.collection {
+    padding: 0.2rem;
+    .collection-item {
+        padding: 0.2rem;
+
+        .rsssource-image {
+            vertical-align: middle;
+            text-align: center;
+            padding: 0.4rem;
+
+            img {
+                max-width: 130px;
+            }
+        }
+        
+        .rsssource-desc {
+            padding: 0.2rem;
+
+            .title {
+                font-weight: bold;
+            }
+        }
+    }
+}

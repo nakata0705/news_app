@@ -1,2 +1,15 @@
-<h1>Source#view</h1>
-<p>Find me in app/views/source/view.html.erb</p>
+<div class="container">
+    <table class="collection">
+        <% @items.each do |item| %>
+            <tr class="collection-item">
+                <td class="rsssource-image">
+                    <img src="<%= item.image %>" alt="">
+                </td>
+                <td class="rsssource-desc">
+                    <div class="title"><%= item.title %></div>
+                    <div><%= item.description %></div>
+                </td>
+            </tr>
+        <% end %>
+    </table>
+</div>

@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180204211838) do
+ActiveRecord::Schema.define(version: 20180204223940) do
 
   create_table "sources", force: :cascade do |t|
-    t.string "title"
+    t.string "title", null: false
     t.string "link"
     t.string "description"
-    t.string "language"
+    t.string "language", null: false
     t.string "copyright"
     t.string "managingEditor"
     t.string "webMaster"
@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(version: 20180204211838) do
     t.integer "skipDays"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "rss_uri", null: false
+    t.index ["rss_uri"], name: "index_sources_on_rss_uri"
   end
 
 end
