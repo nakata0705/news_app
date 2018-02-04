@@ -48,3 +48,9 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# Specify 1.8.0 to avoid stylesheet error
+gem 'coffee-script-source', '1.8.0'
+
+# Google translate utility gem
+gem 'easy_translate'
