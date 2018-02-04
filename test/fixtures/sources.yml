@@ -1,0 +1,43 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  link: MyString
+  description: MyString
+  language: MyString
+  copyright: MyString
+  managingEditor: MyString
+  webMaster: MyString
+  pubDate: 2018-02-04 22:18:38
+  lastBuildDate: 2018-02-04 22:18:38
+  category: MyString
+  generator: MyString
+  docs: MyString
+  cloud: MyString
+  ttl: 1
+  image: MyString
+  rating: MyString
+  textInput: MyString
+  skipHours: 1
+  skipDays: 1
+
+two:
+  title: MyString
+  link: MyString
+  description: MyString
+  language: MyString
+  copyright: MyString
+  managingEditor: MyString
+  webMaster: MyString
+  pubDate: 2018-02-04 22:18:38
+  lastBuildDate: 2018-02-04 22:18:38
+  category: MyString
+  generator: MyString
+  docs: MyString
+  cloud: MyString
+  ttl: 1
+  image: MyString
+  rating: MyString
+  textInput: MyString
+  skipHours: 1
+  skipDays: 1
