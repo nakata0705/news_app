@@ -60,3 +60,8 @@ gem 'coffee-script-source', '1.8.0'
 
 # Google translate utility gem
 gem 'easy_translate'
+
+# 12factor for logging on Heroku
+group :production do
+  gem 'rails_12factor'
+end
