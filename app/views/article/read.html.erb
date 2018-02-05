@@ -1,0 +1,23 @@
+<div class="container">
+    <% @items.each_slice 3 do |item1, item2, item3| %>
+        <div class="row">
+            <% [item1, item2, item3].each do |item| %>
+                <% if item != nil then %>
+                    <div class="col s4">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="<%= item.enclosure %>">
+                            </div>
+                            <div class="card-title">
+                                <a href="<%= item.link %>" target="_blank"><%= item.title %></a>
+                            </div>
+                            <div class="card-title">
+                                <a href="<%= item.link %>" target="_blank"><%= item.title_ja %></a>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>
+            <% end %>
+        </div>
+    <% end %>
+</div>

@@ -1,0 +1,34 @@
+// Place all the styles related to the article controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.card {
+    min-height: 300px;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.card-image {
+    padding: 0.5rem;
+}
+
+.card-title {
+    line-height: 70%;
+    padding: 8px;
+}
+
+.card-title a {
+    font-size: 70%;
+    color: black;
+}
+
+.row .col {
+    margin-top:     0rem;
+    margin-left:    0rem;
+    margin-bottom:  0rem;
+    margin-left:    0rem;
+    padding:        0rem;
+}
+
+.row {
+    margin-bottom: 0rem;
+}

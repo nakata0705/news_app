@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'article/read'
+
   get 'source/view'       => 'source#view'
   get 'source/:id/update' => 'source#update'
   get 'source/update'     => 'source#updateAll'
