@@ -10,10 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180204223940) do
+ActiveRecord::Schema.define(version: 20180205215655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "articles", force: :cascade do |t|
+    t.string "title"
+    t.string "title_lang"
+    t.string "link"
+    t.string "description"
+    t.string "author"
+    t.string "category"
+    t.string "enclosure"
+    t.datetime "pubDate"
+    t.string "title_en"
+    t.string "title_ja"
+    t.string "title_zh_cn"
+    t.string "title_vi"
+    t.string "title_ar"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["link"], name: "index_articles_on_link"
+  end
 
   create_table "sources", force: :cascade do |t|
     t.string "title", null: false
