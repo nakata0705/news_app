@@ -5,9 +5,12 @@ class SourceController < ApplicationController
     @items = Source.all
   end
 
-  def update
+  def update_one_source(target_id)
     # Read RSS and save new items to DB.
-    source = Source.find_by(id: params[:id].to_i)
+    source = Source.find_by(id: target_id)
+    num_new_articles = 0
+
+    # Update
     if source != nil
       uri = source.rss_uri
       lang = source.language
@@ -17,18 +20,17 @@ class SourceController < ApplicationController
       rescue RSS::InvalidRSSError
         rss = RSS::Parser.parse(uri, false)
       end
-      @num_new_articles = 0
-
+      
       rss.items.each do |item|
-        guid = nil
+        target_guid = nil
         if item.guid && item.guid.content
-          guid = item.guid.content
+          target_guid = item.guid.content
         elsif item.link
-          guid = item.link
+          target_guid = item.link
         end
 
-        if guid != nil && Article.find_by(guid: guid) == nil && item.title != nil
-          newarticle = Article.new(guid: guid, title: item.title, link: item.link, title_lang: lang)
+        if target_guid != nil && Article.find_by(link: item.link) == nil && item.title != nil
+          newarticle = Article.new(guid: target_guid, title: item.title, link: item.link, title_lang: lang)
           
           # If the original title language is English, set English translation.
           if lang == 'en'
@@ -59,8 +61,24 @@ class SourceController < ApplicationController
             newarticle.pubDate = item.pubDate
           end
           newarticle.save
-          @num_new_articles = @num_new_articles + 1
+          num_new_articles = num_new_articles + 1
         end
+      end
+    end
+    return num_new_articles;
+  end
+
+  def update
+    @num_new_articles = update_one_source(params[:id].to_i)
+  end
+
+  def update_all
+    @num_new_articles = 0
+    sources = Source.all
+    
+    if sources
+      sources.each do |source|
+        @num_new_articles = @num_new_articles + update_one_source(source.id)
       end
     end
   end

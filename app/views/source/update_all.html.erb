@@ -1,0 +1,9 @@
+<div class="container">
+    <% if @num_new_articles == 0%>
+        No article was updated.
+    <% elsif @num_new_articles == 1 %>
+        An article was updated.
+    <% else %>
+        <%= @num_new_articles %> articles were updated.
+    <% end %>
+</div>
