@@ -1,8 +1,8 @@
 class Article < ApplicationRecord
-    def bind
-        binding
-    end
-
+    validates :link, { uniqueness: true, presence: true }
+    validates :title, { presence: true }
+    validates :title_lang, { presence: true }
+      
     def translate_to_en
         if self.title_en == nil
             if self.title_lang == 'en'
