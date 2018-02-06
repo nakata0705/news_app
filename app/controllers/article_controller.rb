@@ -9,9 +9,10 @@ class ArticleController < ApplicationController
       # Translate to specified language
       @items.each do |item|
         item.translate_to_en
-        item.translate_from_en(lang_google)
+        item.translate_from_en(@lang_google)
       end
-    rescue => exception      
+    rescue => exception
+      p exception      
     end
   end
 end
