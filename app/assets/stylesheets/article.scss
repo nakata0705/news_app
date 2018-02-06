@@ -2,22 +2,26 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .card {
-    min-height: 300px;
+    height: 300px;
     margin-right: 0.5rem;
     margin-bottom: 0.5rem;
 }
 
 .card-image {
     padding: 0.5rem;
+
+    img {
+        height: 200px;
+    }
 }
 
 .card-title {
-    line-height: 70%;
+    line-height: 50%;
     padding: 8px;
 }
 
 .card-title a {
-    font-size: 70%;
+    font-size: 50%;
     color: black;
 }
 
