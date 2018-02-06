@@ -37,7 +37,7 @@ class Article < ApplicationRecord
 
     def translate_from_en(to)
         begin
-            if self.title_en == nil
+            if title_en == nil
                 raise "English translation doesn't exist"
             end
 
@@ -45,17 +45,23 @@ class Article < ApplicationRecord
                 raise "No target language"
             end
             
-            to_db, to_google = validate_langcode(to)
+            to_db, to_google = Article.validate_langcode(to)
             
-            if self.attribute_names.index("title_#{to_db}") == nil
+            if attribute_names.index("title_#{to_db}") == nil
                 raise "Invalid target language #{to_db}"
             end
 
             if self["title_#{to_db}"] == nil
-                self["title_#{to_db}"] = EasyTranslate.translate(self.title_en, from: 'en', to: to_google, model: 'nmt', key: 'AIzaSyADjgRuNoE610_YLwW8P2_rKp08eEPDqFo')
+                to_db_title, to_google_title = Article.validate_langcode(title_lang)
+                if to_db_title == to_db
+                    self["title_#{to_db}"] = title
+                else
+                    self["title_#{to_db}"] = EasyTranslate.translate(self.title_en, from: 'en', to: to_google, model: 'nmt', key: 'AIzaSyADjgRuNoE610_YLwW8P2_rKp08eEPDqFo')
+                end
                 self.save
             end
         rescue => exception
+            p exception
         end
     end
 end
