@@ -7,8 +7,8 @@ class ArticleController < ApplicationController
     @items.each do |item|
       if item.title_ja == nil
         print "Translating #{item.id} to Japanese" 
-        item.title_ja = EasyTranslate.translate(item.title, from: item.title_lang, to: 'ja', model: 'nmt', key: 'AIzaSyADjgRuNoE610_YLwW8P2_rKp08eEPDqFo')
-          item.save
+        item.translate_to_en
+        item.translate_from_en('ja')
       end
     end
   end
