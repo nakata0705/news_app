@@ -44,6 +44,9 @@ class SourceController < ApplicationController
             end
           end
 
+          # Remove unwanted zoom from Vietnam site
+          newarticle.enclosure.sub!(/\/zoom\/.*?\//, '/')
+
           if item.pubDate
             newarticle.pubDate = item.pubDate
           end
