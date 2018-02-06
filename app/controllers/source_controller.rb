@@ -29,6 +29,12 @@ class SourceController < ApplicationController
 
         if guid != nil && Article.find_by(guid: guid) == nil && item.title != nil
           newarticle = Article.new(guid: guid, title: item.title, link: item.link, title_lang: lang)
+          
+          # If the original title language is English, set English translation.
+          if lang == 'en'
+            newarticle.title_en = item.title
+          end
+
           if item.description
             newarticle.description = item.description
           end
@@ -45,7 +51,9 @@ class SourceController < ApplicationController
           end
 
           # Remove unwanted zoom from Vietnam site
-          newarticle.enclosure.sub!(/\/zoom\/.*?\//, '/')
+          if newarticle.enclosure
+            newarticle.enclosure.sub!(/\/zoom\/.*?\//, '/')
+          end
 
           if item.pubDate
             newarticle.pubDate = item.pubDate
