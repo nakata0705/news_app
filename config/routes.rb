@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'article/view'      => 'article#view'
+  get 'article/view/:lang'      => 'article#view'
 
   get 'source/view'       => 'source#view'
   get 'source/:id/update' => 'source#update'

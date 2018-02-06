@@ -1,15 +1,17 @@
 class ArticleController < ApplicationController
   def view
-    # Extract the latest 18 items.
-    @items = Article.where.not(title: nil).order(pubDate: :desc).limit(30)
-    
-    # Translate to Japanese
-    @items.each do |item|
-      if item.title_ja == nil
-        print "Translating #{item.id} to Japanese" 
+    begin
+      # Identify the correct lang code
+      @lang_db, @lang_google = Article.validate_langcode(params[:lang])
+      # Extract the latest 18 items.
+      @items = Article.where.not(title: nil).order(pubDate: :desc).limit(30)
+      
+      # Translate to specified language
+      @items.each do |item|
         item.translate_to_en
-        item.translate_from_en('ja')
+        item.translate_from_en(lang_google)
       end
+    rescue => exception      
     end
   end
 end

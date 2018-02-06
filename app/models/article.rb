@@ -2,7 +2,28 @@ class Article < ApplicationRecord
     validates :link, { uniqueness: true, presence: true }
     validates :title, { presence: true }
     validates :title_lang, { presence: true }
-      
+    
+    def self.validate_langcode(to)
+        to.downcase!
+        to_google = nil
+        case to
+        when 'zh-cn' then
+            to = 'zh_cn'
+            to_google = 'zh-CN'
+        when 'zh-tw' then
+            to = 'zh_tw'
+            to_google = 'zh-TW'
+        else
+            to_google = to
+        end
+        
+        if self.attribute_names.index("title_#{to}") == nil
+            raise "Invalid target language #{to}"
+        end
+
+        return to, to_google
+    end
+
     def translate_to_en
         if self.title_en == nil
             if self.title_lang == 'en'
@@ -24,25 +45,14 @@ class Article < ApplicationRecord
                 raise "No target language"
             end
             
-            to.downcase!
-            to_google = nil
-            case to
-            when 'zh-cn' then
-                to = 'zh_cn'
-                to_google = 'zh-CN'
-            when 'zh-tw' then
-                to = 'zh_tw'
-                to_google = 'zh-TW'
-            else
-                to_google = to
-            end
+            to_db, to_google = validate_langcode(to)
             
-            if self.attribute_names.index("title_#{to}") == nil
-                raise "Invalid target language #{to}"
+            if self.attribute_names.index("title_#{to_db}") == nil
+                raise "Invalid target language #{to_db}"
             end
 
-            if self["title_#{to}"] == nil
-                self["title_#{to}"] = EasyTranslate.translate(self.title_en, from: 'en', to: to_google, model: 'nmt', key: 'AIzaSyADjgRuNoE610_YLwW8P2_rKp08eEPDqFo')
+            if self["title_#{to_db}"] == nil
+                self["title_#{to_db}"] = EasyTranslate.translate(self.title_en, from: 'en', to: to_google, model: 'nmt', key: 'AIzaSyADjgRuNoE610_YLwW8P2_rKp08eEPDqFo')
                 self.save
             end
         rescue => exception
