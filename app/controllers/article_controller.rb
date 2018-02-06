@@ -1,7 +1,7 @@
 class ArticleController < ApplicationController
   def read
     # Extract the latest 18 items.
-    @items = Article.where.not(title: nil).order(pubDate: :desc).limit(18)
+    @items = Article.where.not(title: nil).order(pubDate: :desc).limit(60)
     
     # Translate to Japanese
     @items.each do |item|
